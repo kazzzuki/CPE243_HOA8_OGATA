@@ -1,0 +1,5 @@
+
+[manage]
+
+192.168.56.136	ansible_connection=ssh
+

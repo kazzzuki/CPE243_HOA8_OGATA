@@ -1,0 +1,23 @@
+---
+- hosts: manage
+  become: true
+  tasks:
+
+  - name: Create directory
+    file:
+      path: /home/kazuki/extract
+      state: directory
+
+  - name: Copy PCAP file to manage node
+    copy:
+      src: /home/kazuki/CPE243_HOA8_OGATA/sample.pcap
+      dest: /home/kazuki/extract
+
+  - name: Update Ubuntu
+    apt:
+      update_cache: yes
+      state: present
+
+  - name: Extract an Executable from PCAP
+    shell: "tshark -r /home/kazuki/extract/sample.pcap --export-objects 'http,/home/kazuki/extract'"
+
